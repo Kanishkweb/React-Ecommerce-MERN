@@ -1,0 +1,121 @@
+{
+    "_id": "3528ec85-a46f-480b-96ec-03fdab8effa2",
+    "colName": "Ecommerce",
+    "created": "2023-08-15T10:54:48.104Z",
+    "sortNum": 10000,
+    "folders": [
+        {
+            "_id": "ea3ae12b-3649-479b-8e88-d4d9f85b8313",
+            "name": "Product",
+            "containerId": "",
+            "created": "2023-08-15T17:38:10.282Z",
+            "sortNum": 10000
+        }
+    ],
+    "requests": [
+        {
+            "_id": "b18e1533-1b65-40dc-9995-ebe82877842c",
+            "colId": "3528ec85-a46f-480b-96ec-03fdab8effa2",
+            "containerId": "ea3ae12b-3649-479b-8e88-d4d9f85b8313",
+            "name": "Create a Product --Admin",
+            "url": "http://localhost:3000/api/v1/products/new",
+            "method": "POST",
+            "sortNum": 10000,
+            "created": "2023-08-15T16:29:21.860Z",
+            "modified": "2023-08-15T16:45:48.743Z",
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                }
+            ],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\":\"Prooduct1\",\n  \"price\":1200,\n  \"description\":\"This is a sample prodcut\",\n  \"category\":\"Laptop\",\n  \"images\":{\n    \"public_id\":\"sample image\",\n    \"url\":\"sample/url\"\n  }\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "8cf3e1ce-317e-48ed-a93b-3a73d8ae0042",
+            "colId": "3528ec85-a46f-480b-96ec-03fdab8effa2",
+            "containerId": "ea3ae12b-3649-479b-8e88-d4d9f85b8313",
+            "name": "Get Product Detail",
+            "url": "http://localhost:3000/api/v1/products",
+            "method": "GET",
+            "sortNum": 20000,
+            "created": "2023-08-15T16:46:08.242Z",
+            "modified": "2023-08-15T16:46:33.940Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "07323f72-959e-4849-bd7b-a091cec582a9",
+            "colId": "3528ec85-a46f-480b-96ec-03fdab8effa2",
+            "containerId": "ea3ae12b-3649-479b-8e88-d4d9f85b8313",
+            "name": "Update Product --Admin",
+            "url": "http://localhost:3000/api/v1/products/64dbaa0485674b56f878d623",
+            "method": "PUT",
+            "sortNum": 30000,
+            "created": "2023-08-15T17:34:02.494Z",
+            "modified": "2023-08-15T17:36:00.593Z",
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                }
+            ],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\":\"Updated Product\",\n  \"price\":1200,\n  \"description\":\"This is a sample prodcut\",\n  \"category\":\"Laptop\",\n  \"images\":{\n    \"public_id\":\"sample image\",\n    \"url\":\"sample/url\"\n  }\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "e0c18af0-fc91-42a1-b1e5-a7d126168ff3",
+            "colId": "3528ec85-a46f-480b-96ec-03fdab8effa2",
+            "containerId": "",
+            "name": "Delete Product --Admin",
+            "url": "http://localhost:3000/api/v1/products/64dbabbcbc235c8811e4d",
+            "method": "DELETE",
+            "sortNum": 40000,
+            "created": "2023-08-15T17:45:56.394Z",
+            "modified": "2023-08-15T17:58:19.057Z",
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                },
+                {
+                    "name": "id",
+                    "value": "64dbabbcbc235c8811e4d"
+                }
+            ],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "96dd6203-58da-4a7a-897c-bd88063b0abb",
+            "colId": "3528ec85-a46f-480b-96ec-03fdab8effa2",
+            "containerId": "ea3ae12b-3649-479b-8e88-d4d9f85b8313",
+            "name": "Get Product Detail ",
+            "url": "http://localhost:3000/api/v1/products/64dbbc53b602b9fc03b5f29d",
+            "method": "GET",
+            "sortNum": 50000,
+            "created": "2023-08-15T18:04:36.087Z",
+            "modified": "2023-08-15T18:05:36.023Z",
+            "headers": [
+                {
+                    "name": "id",
+                    "value": "64dbbc53b602b9fc03b5f29d"
+                }
+            ],
+            "params": [],
+            "tests": []
+        }
+    ]
+}

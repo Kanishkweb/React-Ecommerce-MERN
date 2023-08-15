@@ -2,4 +2,5 @@
 /node_modules
 /Backend/node_modules
 
+# env File
 /Backend/config
