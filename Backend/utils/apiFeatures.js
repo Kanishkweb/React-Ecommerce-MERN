@@ -23,7 +23,7 @@ class ApiFeatures {
 
         console.log(queryCopy)
         // removing Some Field For Category
-        const removeField = ["keyword","psge","limit"];
+        const removeField = ["keyword","page","limit"];
 
         removeField.forEach(key => delete queryCopy[key]);
 
@@ -34,8 +34,17 @@ class ApiFeatures {
 
         console.log(queryCopy)
         this.query = this.query.find(JSON.parse(queryStr));
+        return this;    
+    }
+
+    pagination(resultPerPage){
+        const currentPage = Number(this.queryStr.page) || 1;
+
+        const skip = resultPerPage * (currentPage - 1)
+
+        this.query = this.query.limit(resultPerPage).skip(skip);
+
         return this;
-        console.log(queryCopy)
     }
 }
 

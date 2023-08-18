@@ -10,6 +10,13 @@
             "containerId": "",
             "created": "2023-08-15T17:38:10.282Z",
             "sortNum": 10000
+        },
+        {
+            "_id": "cf77ff26-ff52-4f81-a8ad-4de7cb36f5fa",
+            "name": "Authentication",
+            "containerId": "",
+            "created": "2023-08-17T17:06:03.168Z",
+            "sortNum": 30000
         }
     ],
     "requests": [
@@ -46,8 +53,14 @@
             "method": "GET",
             "sortNum": 20000,
             "created": "2023-08-15T16:46:08.242Z",
-            "modified": "2023-08-15T16:46:33.940Z",
-            "headers": [],
+            "modified": "2023-08-17T22:38:59.432Z",
+            "headers": [
+                {
+                    "name": "token",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ZGU3NjUzNjJhNTNhNjQ5MDVlZjUwMCIsImlhdCI6MTY5MjMxMTQwMCwiZXhwIjoxNjkyNzQzNDAwfQ.MN5nnLV6syRycYRn3byyRWvEmRony8efOZsjwtd1VZk",
+                    "isDisabled": true
+                }
+            ],
             "params": [],
             "tests": []
         },
@@ -80,11 +93,11 @@
             "colId": "3528ec85-a46f-480b-96ec-03fdab8effa2",
             "containerId": "ea3ae12b-3649-479b-8e88-d4d9f85b8313",
             "name": "Delete Product --Admin",
-            "url": "http://localhost:3000/api/v1/products/64dbabbcbc235c8811e4d",
+            "url": "http://localhost:3000/api/v1/products/64dbaa0485674b56f878d623",
             "method": "DELETE",
             "sortNum": 60000,
             "created": "2023-08-15T17:45:56.394Z",
-            "modified": "2023-08-15T17:58:19.057Z",
+            "modified": "2023-08-17T17:09:20.333Z",
             "headers": [
                 {
                     "name": "Content-Type",
@@ -114,6 +127,64 @@
                     "value": "64dbbc53b602b9fc03b5f29d"
                 }
             ],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "1fbc3dc4-4e96-43c1-b8e4-7f8e6734eb44",
+            "colId": "3528ec85-a46f-480b-96ec-03fdab8effa2",
+            "containerId": "cf77ff26-ff52-4f81-a8ad-4de7cb36f5fa",
+            "name": "Register User",
+            "url": "http://localhost:3000/api/v1/register",
+            "method": "POST",
+            "sortNum": 70000,
+            "created": "2023-08-17T17:08:42.009Z",
+            "modified": "2023-08-17T19:32:34.703Z",
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json",
+                    "isDisabled": true
+                }
+            ],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\":\"papakipari\",\n  \"password\":\"papakipari\",\n  \"email\":\"papakipari@baap.com\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "eaa108b4-e6fa-4ffc-a1c9-d75b6eb018c3",
+            "colId": "3528ec85-a46f-480b-96ec-03fdab8effa2",
+            "containerId": "cf77ff26-ff52-4f81-a8ad-4de7cb36f5fa",
+            "name": "Login User",
+            "url": "http://localhost:3000/api/v1/login",
+            "method": "POST",
+            "sortNum": 80000,
+            "created": "2023-08-17T19:31:10.955Z",
+            "modified": "2023-08-17T19:35:48.509Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"email\":\"papakipari@baap.com\",\n  \"password\":\"papakipari\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "4e6fc886-ba2f-4d68-a76c-45a4829cb7e5",
+            "colId": "3528ec85-a46f-480b-96ec-03fdab8effa2",
+            "containerId": "cf77ff26-ff52-4f81-a8ad-4de7cb36f5fa",
+            "name": "Logout User",
+            "url": "http://localhost:3000/api/v1/logout",
+            "method": "GET",
+            "sortNum": 90000,
+            "created": "2023-08-17T21:18:56.794Z",
+            "modified": "2023-08-17T21:20:38.817Z",
+            "headers": [],
             "params": [],
             "tests": []
         }
