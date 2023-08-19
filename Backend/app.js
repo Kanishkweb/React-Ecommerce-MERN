@@ -5,7 +5,7 @@ const cookieParser = require("cookie-parser")
 const app = express();
 
 app.use(express.json())
-
+app.use(cookieParser())
 // Route Imports
 const product = require("./routes/productRoute")
 const user = require("./routes/userRoute")
