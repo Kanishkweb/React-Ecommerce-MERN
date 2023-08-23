@@ -1,20 +1,28 @@
 const Product = require("../models/productModel");
 const ErrorHander = require("../utils/errorHandler");
-const catchAsyncErrors = require("../middleware/catchAsyncErrors");
 const ApiFeatures = require("../utils/apiFeatures");
 
 // Create Product -- Admin
-exports.createProduct = catchAsyncErrors(async (req, res, next) => {
-  const product = await Product.create(req.body);
+const createProduct = async (req, res, next) => {
+  try {
+    req.body.user = req.user.id;
 
-  res.status(201).json({
-    success: true,
-    product,
-  });
-});
+    const product = await Product.create(req.body);
+
+    res.status(201).json({
+      success: true,
+      product,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: "An error occurred while creating the product",
+    });
+  }
+};
 
 // Get All Products
-exports.getAllProducts = async (req, res) => {
+const getAllProducts = async (req, res) => {
   try {
     const resultPerPage = 5;
     const productCount = await Product.countDocuments();
@@ -24,15 +32,13 @@ exports.getAllProducts = async (req, res) => {
       .filter()
       .pagination(resultPerPage);
     const products = await apiFeatures.query;
-    
-    // Use res.json instead of res.status.json
+
     res.status(200).json({
       products,
       success: true,
       productCount,
     });
   } catch (error) {
-    // Handle any error that might occur during the request
     res.status(500).json({
       success: false,
       message: "An error occurred while fetching the products",
@@ -41,7 +47,7 @@ exports.getAllProducts = async (req, res) => {
 };
 
 // Get Product Details
-exports.getProductDetail = catchAsyncErrors(async (req, res, next) => {
+const getProductDetail = async (req, res, next) => {
   try {
     const product = await Product.findById(req.params.id);
 
@@ -59,10 +65,10 @@ exports.getProductDetail = catchAsyncErrors(async (req, res, next) => {
       message: "An error occurred while pulling the detail of the product",
     });
   }
-});
+};
 
 // Update Product -- Admin
-exports.updateProduct = catchAsyncErrors(async (req, res, next) => {
+const updateProduct = async (req, res, next) => {
   try {
     const product = await Product.findById(req.params.id);
 
@@ -70,14 +76,13 @@ exports.updateProduct = catchAsyncErrors(async (req, res, next) => {
       return next(new ErrorHander("Product Not Found", 404));
     }
 
-    // Use findByIdAndUpdate and capture the updated product
     const updatedProduct = await Product.findByIdAndUpdate(
       req.params.id,
       req.body,
       {
         new: true,
         runValidators: true,
-        useFindAndModify: false,
+        useFindAndModify: false, // for more mordern update operation
       }
     );
 
@@ -91,10 +96,10 @@ exports.updateProduct = catchAsyncErrors(async (req, res, next) => {
       message: "An error occurred while updating the product",
     });
   }
-});
+};
 
 // Delete Product
-exports.deleteProduct = catchAsyncErrors(async (req, res, next) => {
+const deleteProduct = async (req, res, next) => {
   try {
     const product = await Product.findById(req.params.id);
 
@@ -114,4 +119,131 @@ exports.deleteProduct = catchAsyncErrors(async (req, res, next) => {
       message: "An error occurred while deleting the product",
     });
   }
-});
+};
+
+// Create New Review or Update the review
+const createProductReview = async (req, res, next) => {
+  try {
+    const { rating, comment, productId } = req.body;
+
+    const review = {
+      user: req.user._id,
+      name: req.user.name,
+      rating: Number(rating),
+      comment,
+    };
+
+    const product = await Product.findById(productId);
+
+    const isReviewed = product.reviews.find(
+      (rev) => rev.user.toString() === req.user._id.toString()
+    );
+
+    if (isReviewed) {
+      product.reviews.forEach((rev) => {
+        if (rev.user.toString() === req.user._id.toString())
+          (rev.rating = rating), (rev.comment = comment);
+      });
+    } else {
+      product.reviews.push(review);
+      product.numOfReviews = product.reviews.length;
+    }
+
+    let avg = 0;
+
+    product.reviews.forEach((rev) => {
+      avg += rev.rating;
+    });
+
+    product.ratings = avg / product.reviews.length;
+
+    await product.save({ validateBeforeSave: false });
+
+    res.status(200).json({
+      success: true,
+    });
+  } catch (error) {
+    res.status(400).json({
+      error: error,
+    });
+  }
+};
+
+// Get All Reviews of a Product
+const getProductReviews = async (req, res, next) => {
+  try {
+    const product = await Product.findById(req.query.id);
+
+    if (!product) {
+      return next(new ErrorHander("Product not Found", 404));
+    }
+
+    res.status(200).json({
+      success: true,
+      reviews: product.reviews,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: "An error occurred while fetching the product reviews",
+    });
+  }
+};
+
+// Delete Review
+const deleteReview = async (req, res, next) => {
+  try {
+    const product = await Product.findById(req.query.productId);
+
+    if (!product) {
+      return next(new ErrorHander("Product Not Found", 404));
+    }
+
+    const reviews = product.reviews.filter(
+      (rev) => rev._id.toString() !== req.query.id
+    );
+
+    let avg = 0;
+    reviews.forEach((rev) => {
+      avg += rev.rating;
+    });
+
+    const rating = avg / reviews.length;
+
+    const numOfReviews = reviews.length;
+
+    await Product.findByIdAndUpdate(
+      req.query.productId,
+      {
+        reviews,
+        rating,
+        numOfReviews,
+      },
+      {
+        new: true,
+        runValidators: true,
+        useFindAndModify: false,
+      }
+    );
+
+    res.status(200).json({
+      success: true,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: "An error occurred while deleting the review",
+    });
+  }
+};
+
+module.exports = {
+  createProduct,
+  getAllProducts,
+  getProductDetail,
+  updateProduct,
+  deleteProduct,
+  createProductReview,
+  getProductReviews,
+  deleteReview,
+};
