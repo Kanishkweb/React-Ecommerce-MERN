@@ -9,6 +9,17 @@ import ProductCard from "../Home/ProductCard";
 import { useAlert } from "react-alert";
 import Pagination from "react-js-pagination";
 
+const categories = [
+  "Laptop",
+  "Footwear",
+  "Bottom",
+  "Tops",
+  "Attire",
+  "Camera",
+  "SmartPhones",
+]
+
+
 const Products = ({ match }) => {
   const dispatch = useDispatch();
 
@@ -34,14 +45,15 @@ const Products = ({ match }) => {
   };
 
   const priceHandler = (event, newPrice) => {
-    console.log("1")
+    console.log("1");
     setPrice(newPrice);
   };
 
-  let count = filteredProductsCount;
   useEffect(() => {
-    dispatch(getProduct(keyword, currentPage,price));
-  }, [dispatch, keyword, currentPage,price]);
+    dispatch(getProduct(keyword, currentPage, price));
+  }, [dispatch, keyword, currentPage, price]);
+
+  let count = filteredProductsCount;
 
   return (
     <Fragment>
@@ -69,22 +81,36 @@ const Products = ({ match }) => {
             />
           </div>
 
-          <div className="paginationBox">
-            <Pagination
-              activePage={currentPage}
-              itemsCountPerPage={resultperPage}
-              totalItemsCount={productsCount}
-              onChange={setCurrentPageNo}
-              nextPageText="Next"
-              prevPageText="Prev"
-              firstPageText="1st"
-              lastPageText="Last"
-              itemClass="page-item"
-              linkClass="page-link"
-              activeClass="pageItemActive"
-              activeLinkClass="pageLinkActive"
-            />
-          </div>
+          <Typography>Categories</Typography>
+                <ul className="categoryBox">
+                  {category.map((category) => (
+                    <li
+                    className="category-link"
+                    key={category}
+                    onClick={() => setCategory}(category)
+                    
+                    ></li>
+                  ))}
+                </ul>
+
+          {resultperPage < count && (
+            <div className="paginationBox">
+              <Pagination
+                activePage={currentPage}
+                itemsCountPerPage={resultperPage}
+                totalItemsCount={productsCount}
+                onChange={setCurrentPageNo}
+                nextPageText="Next"
+                prevPageText="Prev"
+                firstPageText="1st"
+                lastPageText="Last"
+                itemClass="page-item"
+                linkClass="page-link"
+                activeClass="pageItemActive"
+                activeLinkClass="pageLinkActive"
+              />
+            </div>
+          )}
         </Fragment>
       )}
     </Fragment>
