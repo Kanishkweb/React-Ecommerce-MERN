@@ -24,8 +24,8 @@ const createProduct = async (req, res, next) => {
 // Get All Products
 const getAllProducts = async (req, res) => {
   try {
-    const resultPerPage = 5;
-    const productCount = await Product.countDocuments();
+    const resultPerPage = 8;
+    const productsCount = await Product.countDocuments();
 
     const apiFeatures = new ApiFeatures(Product.find(), req.query)
       .search()
@@ -36,7 +36,8 @@ const getAllProducts = async (req, res) => {
     res.status(200).json({
       products,
       success: true,
-      productCount,
+      productsCount,
+      resultPerPage,
     });
   } catch (error) {
     res.status(500).json({

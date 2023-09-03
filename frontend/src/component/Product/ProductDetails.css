@@ -1,0 +1,199 @@
+.ProductDetails {
+  background-color: #f5f5f5;
+  display: flex;
+  justify-content: space-around;
+  padding: 4rem;
+  border-radius: 10px;
+}
+
+.ProductDetails > div {
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  background-color: white;
+}
+.Carousel {
+  width: 100%;
+  max-width: 400px; /* Adjust the maximum width as needed */
+  height: auto; /* Allow the height to adjust based on image aspect ratio */
+  margin: 0 auto; /* Center the carousel horizontally */
+}
+
+.CarouselImage {
+  width: 100%;
+  max-height: 100%; /* Set max-height to fill the available height */
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.detailsBlock-1 > h2 {
+  font-size: 1.8rem;
+  color: #333;
+  margin: 0;
+}
+
+.detailsBlock-1 > p {
+  font-size: 0.8rem;
+  color: #777;
+  margin: 0.5rem 0 0;
+}
+
+.detailsBlock-2 {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  padding: 1rem 0;
+}
+
+.detailsBlock-2-span {
+  font-size: 1rem;
+  color: #666;
+  margin-left: 0.5rem;
+}
+
+.detailsBlock-3 > h1 {
+  font-size: 2.5rem;
+  color: #d9534f;
+  margin: 1rem 0;
+}
+
+.detailsBlock-3-1 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 1rem;
+}
+
+.detailsBlock-3-1-1 > button {
+  border: none;
+  background-color: #333;
+  color: white;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.detailsBlock-3-1-1 > input {
+  border: 1px solid #ccc;
+  padding: 0.5rem;
+  width: 40px;
+  text-align: center;
+  font-size: 1rem;
+  color: #666;
+}
+
+.detailsBlock-3-1 > button:last-child {
+  border: none;
+  background-color: #d9534f;
+  color: white;
+  padding: 0.5rem 2rem;
+  font-size: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.detailsBlock-3 > p {
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  padding: 1rem 0;
+  color: #666;
+  font-size: 1rem;
+  margin: 1rem 0;
+}
+
+.detailsBlock-4 {
+  color: #333;
+  font-size: 1.2rem;
+  margin-top: 1.5rem;
+}
+
+.detailsBlock-4 > p {
+  color: #666;
+  font-size: 1rem;
+  margin-top: 0.5rem;
+}
+
+.submitReview {
+  border: none;
+  background-color: #d9534f;
+  color: white;
+  padding: 0.5rem 2rem;
+  font-size: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.submitReview:hover {
+  background-color: #c9302c;
+  transform: scale(1.05);
+}
+
+.reviewsHeading {
+  color: #555;
+  font-size: 1.5rem;
+  text-align: center;
+  border-bottom: 1px solid #ccc;
+  padding: 1rem;
+  margin: 0 auto 2rem;
+}
+
+.reviews {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.reviewCard {
+  flex: 0 0 calc(33.33% - 2rem);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  padding: 1.5rem;
+  text-align: center;
+  background-color: white;
+}
+
+.reviewCard > img {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.reviewCard > p {
+  color: #333;
+  font-size: 1rem;
+  margin: 1rem 0;
+}
+
+.reviewCardComment {
+  color: #555;
+  font-size: 0.8rem;
+}
+
+.noReviews {
+  font-size: 1.2rem;
+  text-align: center;
+  color: #666;
+}
+
+@media screen and (max-width: 768px) {
+  .ProductDetails {
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+  }
+  
+  .ProductDetails > div {
+    width: 100%;
+    max-width: 400px;
+    margin-bottom: 2rem;
+  }
+}
