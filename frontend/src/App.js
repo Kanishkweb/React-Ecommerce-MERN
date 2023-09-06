@@ -16,10 +16,10 @@ function App() {
     <>
       <Router>
         <Header />
-        <Route extact path="/home" component={Home}/>
-        <Route extact path="/product/:id" component={ProductDetails} />
-        <Route extact path="/products" component={Products} />
-        <Route extact path="/search" component={Search} />
+        <Route exact path="/" component={Home}/>
+        <Route exact path="/product/:id" component={ProductDetails} />
+        <Route exact path="/products" component={Products} />
+        <Route exact path="/search" component={Search} />
         <Route  path="/products/:keyword" component={Products} />
         <Footer/>
       </Router>
