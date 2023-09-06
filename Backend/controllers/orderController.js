@@ -9,7 +9,7 @@ const newOrder = async (req, res, next) => {
     const { shippingInfo, orderItems, paymentInfo, itemsPrice, shippingPrice } =
       req.body;
 
-    // Validate that required data is present
+    // Validate that required data is present and these are mandatory
     if (
       !shippingInfo ||
       !orderItems ||
