@@ -17,8 +17,7 @@ const categories = [
   "Attire",
   "Camera",
   "SmartPhones",
-]
-
+];
 
 const Products = ({ match }) => {
   const dispatch = useDispatch();
@@ -50,8 +49,8 @@ const Products = ({ match }) => {
   };
 
   useEffect(() => {
-    dispatch(getProduct(keyword, currentPage, price));
-  }, [dispatch, keyword, currentPage, price]);
+    dispatch(getProduct(keyword, currentPage, price, category,rating));
+  }, [dispatch, keyword, currentPage, price, category,rating]);
 
   let count = filteredProductsCount;
 
@@ -82,17 +81,30 @@ const Products = ({ match }) => {
           </div>
 
           <Typography>Categories</Typography>
-                <ul className="categoryBox">
-                  {category.map((category) => (
-                    <li
-                    className="category-link"
-                    key={category}
-                    onClick={() => setCategory}(category)
-                    
-                    ></li>
-                  ))}
-                </ul>
+          <ul className="categoryBox">
+            {categories.map((category) => (
+              <li
+                className="category-link"
+                key={category}
+                onClick={() => setCategory(category)}
+              >
+                {category}
+              </li>
+            ))}
+          </ul>
 
+          <fieldset>
+            <Typography component="lengend">Rating Above</Typography>
+            <Slider
+              value={rating}
+              onChange={(e, newRating) => {
+                setRating(newRating);
+              }}
+              aria-labelledby="continuous slider"
+              min={0}
+              max={5}
+            />
+          </fieldset>
           {resultperPage < count && (
             <div className="paginationBox">
               <Pagination

@@ -11,7 +11,6 @@ import ProductDetails from "./component/Product/ProductDetails.js"
 import Product from "./component/Home/ProductCard.js";
 import Products from "./component/Product/Products.js"
 import Search from "./component/Product/Search.js"
-
 function App() {
   return (
     <>
@@ -21,7 +20,7 @@ function App() {
         <Route extact path="/product/:id" component={ProductDetails} />
         <Route extact path="/products" component={Products} />
         <Route extact path="/search" component={Search} />
-        <Route  path="/products/:keyword" component={Product} />
+        <Route  path="/products/:keyword" component={Products} />
         <Footer/>
       </Router>
     </>

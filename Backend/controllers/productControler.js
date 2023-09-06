@@ -22,7 +22,7 @@ const createProduct = async (req, res, next) => {
 };
 
 // Get All Products
-const getAllProducts = async (req, res) => {
+const getAllProducts = async (req, res, next) => {
   try {
     const resultPerPage = 8;
     const productsCount = await Product.countDocuments();
@@ -31,13 +31,17 @@ const getAllProducts = async (req, res) => {
       .search()
       .filter()
       .pagination(resultPerPage);
-    const products = await apiFeatures.query;
 
+    let products = await apiFeatures.query;
+    let filteredProductsCount = products.length;
+
+    // products = await apiFeatures.query;
     res.status(200).json({
       products,
       success: true,
       productsCount,
       resultPerPage,
+      filteredProductsCount,
     });
   } catch (error) {
     res.status(500).json({
