@@ -8,7 +8,7 @@ import ReviewCard from "./ReviewCard.js";
 import Carousel from "react-material-ui-carousel";
 import { Paper, Button } from "@mui/material";
 import { useAlert } from "react-alert";
-
+import { addItemsToCart } from "../../actions/cartAction";
 import {
   Dialog,
   DialogActions,
@@ -33,7 +33,7 @@ const ProductDetails = ({ match }) => {
       dispatch(clearErrors());
     }
     dispatch(getProductDetails(productId));
-  }, [dispatch, productId,error,alert]);
+  }, [dispatch, productId, error, alert]);
 
   const options = {
     size: "large",
@@ -45,11 +45,32 @@ const ProductDetails = ({ match }) => {
   const [open, setOpen] = useState(false);
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState("");
+  const stock = product.Stock;
+  const decreaseQuantity = () => {
+    if (1 >= quantity) return;
 
-  const decreaseQuantity = () => {};
-  const increaseQuantity = () => {};
+    const qty = quantity - 1;
+    setQuantity(qty);
+  };
+  const increaseQuantity = () => {
+    if (stock - 1 >= quantity) {
+      const qty = quantity + 1;
+      setQuantity(qty);
+    }
+    if (stock === quantity) {
+      alert.show("Out For Stock", {
+        timeout: 3000,
+        type: "success",
+      });
+    }
+  };
   const reviewSubmitHandler = () => {};
-  const addToCartHandler = () => {};
+
+  
+  const addToCartHandler = () => {
+    dispatch(addItemsToCart(match.params.id, quantity));
+    alert.success("Item Added To Cart");
+  };
 
   const submitReviewToggle = () => {};
   return (

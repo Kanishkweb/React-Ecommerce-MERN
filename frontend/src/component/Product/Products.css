@@ -8,11 +8,20 @@
   text-align: center;
 }
 
+.centered-title {
+  text-align: center;
+  margin: auto;
+  padding: 2vmax;
+}
+
+
 .products {
   display: flex;
   flex-wrap: wrap;
   padding: 0 5vmax;
+  padding-left: 14vmax;
   justify-content: center;
+  min-height: 30vh;
 }
 
 .paginationBox {
@@ -28,14 +37,13 @@
 }
 
 .page-item {
-  background-color: rgb(225, 225, 225);
-  list-style-type: none;
+  background-color: rgb(255, 255, 255);
+  list-style: none;
   border: 1px solid rgba(0, 0, 0, 0.178);
   padding: 1vmax 1.5vmax;
   transition: all 0.3s;
   cursor: pointer;
 }
-
 .page-item:first-child {
   border-radius: 5px 0 0 5px;
 }
@@ -43,20 +51,19 @@
 .page-item:last-child {
   border-radius: 0 5px 5px 0;
 }
-
 .page-link {
   text-decoration: none;
   font: 300 0.7vmax "Roboto";
   color: rgb(80, 80, 80);
-  transition: all 0.3sec;
+  transition: all 0.3s;
 }
 
 .page-item:hover {
-  background-color: #fff;
+  background-color: rgb(230, 230, 230);
 }
 
 .page-item:hover .page-link {
-  color: rgb(80, 80, 80);
+  color: rgb(0, 0, 0);
 }
 
 .pageItemActive {
@@ -71,7 +78,7 @@
   width: 10vmax;
   position: absolute;
   top: 10vmax;
-  left: 4vmax;
+  left: 2vmax;
 }
 
 .categoryBox {
@@ -79,31 +86,59 @@
 }
 
 .category-link {
-  list-style-type: none;
+  list-style: none;
   color: rgba(0, 0, 0, 0.61);
-  font: 400 0.8vmax "Roboto";
+  font: 400 1vmax "Roboto";
   margin: 0.4vmax;
   cursor: pointer;
   transition: all 0.5s;
 }
-
-.filterBox > fieldset{
-  border: 1px solid black;
-}
 .category-link:hover {
   color: tomato;
 }
-@media (max-width: 600px) {
+
+.filterBox > fieldset {
+  border: 1px solid rgba(0, 0, 0, 0.329);
+}
+fieldset {
+  position: absolute;
+  width: 12vmax;
+  top: 20vmax;
+  left: 2vmax;
+  border: none;
+}
+
+.category-container{
+  position: absolute;
+  margin: 10px;
+  top: 25vmax;
+}
+
+@media screen and (max-width: 600px) {
   .filterBox {
-    width: 20vmax;
+    width: 60%; /* Adjust width for full width on mobile */
     position: static;
     margin: auto;
+  }
+
+  .category-container {
+    position: static; /* Reset position */
+    text-align: center; /* Center content */
+    margin-top: 1rem; /* Add margin for spacing */
+  }
+
+  fieldset {
+    position: static; /* Reset position */
+    width: 60%; /* Make it full width on mobile */
+    margin: 0 auto; /* Center the fieldset */
   }
 
   .page-link {
     font: 300 1.7vmax "Roboto";
   }
+
   .category-link {
-    font: 400 1.8vmax "Roboto";
+    font: 400 2vmax "Roboto";
   }
 }
+
