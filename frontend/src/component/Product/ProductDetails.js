@@ -1,6 +1,10 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { clearErrors, getProductDetails } from "../../actions/productAction";
+import {
+  clearErrors,
+  getProductDetails,
+  newReview,
+} from "../../actions/productAction";
 import ReactStars from "react-rating-stars-component";
 import LoadingBar from "../layout/loader/loader";
 import MetaData from "../layout/MetaData";
@@ -17,6 +21,7 @@ import {
 } from "@mui/material";
 import Rating from "@mui/material/Rating";
 import "./ProductDetails.css";
+import { NEW_REVIEW_RESET } from "../../constants/productConstants";
 
 const ProductDetails = ({ match }) => {
   const dispatch = useDispatch();
@@ -27,13 +32,26 @@ const ProductDetails = ({ match }) => {
     (state) => state.productDetails
   );
 
+  const { success, error: reviewError } = useSelector(
+    (state) => state.newReview
+  );
+
   useEffect(() => {
     if (error) {
       alert.error(error);
       dispatch(clearErrors());
     }
+    if (reviewError) {
+      alert.error(reviewError);
+      dispatch(clearErrors());
+    }
+    if(success) {
+      alert.success("Review Submitted Successfully")
+      dispatch({type:NEW_REVIEW_RESET})
+    }
+
     dispatch(getProductDetails(productId));
-  }, [dispatch, productId, error, alert]);
+  }, [dispatch, productId, error, alert,reviewError,success]);
 
   const options = {
     size: "large",
@@ -64,15 +82,26 @@ const ProductDetails = ({ match }) => {
       });
     }
   };
-  const reviewSubmitHandler = () => {};
+  const reviewSubmitHandler = () => {
+    const myForm = new FormData();
 
-  
+    myForm.set("rating", rating);
+    myForm.set("comment", comment);
+    myForm.set("productId", match.params.id);
+
+    dispatch(newReview(myForm));
+
+    setOpen(false);
+  };
+
   const addToCartHandler = () => {
     dispatch(addItemsToCart(match.params.id, quantity));
     alert.success("Item Added To Cart");
   };
 
-  const submitReviewToggle = () => {};
+  const submitReviewToggle = () => {
+    open ? setOpen(false) : setOpen(true);
+  };
   return (
     <Fragment>
       {loading ? (

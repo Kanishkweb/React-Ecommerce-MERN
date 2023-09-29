@@ -129,7 +129,17 @@
   cursor: pointer;
   transition: background-color 0.3s, transform 0.3s;
 }
-
+.submitDialog{
+  display: flex;
+  flex-direction: column;
+}
+.submitDialogTextArea{
+  border: 1px solid rgba(0,0,0,0.082);
+  margin: 1vmax 0;
+  outline: none;
+  padding: 1rem;
+  font: 300 1rem "Roboto";
+}
 .submitReview:hover {
   background-color: #c9302c;
   transform: scale(1.05);
